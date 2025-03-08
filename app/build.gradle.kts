@@ -6,7 +6,8 @@ plugins {
 
 android {
     namespace = "com.example.macy"
-    compileSdk = 34
+    compileSdk = 35
+
 
     defaultConfig {
         applicationId = "com.example.macy"
