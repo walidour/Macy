@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController // Add this import
 import com.example.macy.databinding.FragmentEditProfileBinding
 
 class EditProfileFragment : Fragment() {
@@ -24,16 +25,19 @@ class EditProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
-        viewModel.loadUserProfile(1) // Assume user ID 1
 
-// File: ui/profile/EditProfileFragment.kt
+        // Get current user ID (replace with actual logic)
+        val userId = 1L
+
+
         binding.btnSave.setOnClickListener {
-            val name = binding.etName.text.toString()
-            val email = binding.etEmail.text.toString()
-            val address = binding.etAddress.text.toString()
+            val name = binding.etName.toString() // Use binding!
+            val email = binding.etEmail.toString()
+            val address = binding.etAddress.toString()
 
-            // Update user in ViewModel
-            viewModel.updateUser(name, email, address)
+            // Example: Update user (replace with actual user ID)
+            viewModel.updateUser(userId = 1L, name, email, address)
+            findNavController().navigateUp()
         }
     }
 }

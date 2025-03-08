@@ -7,19 +7,16 @@ import androidx.lifecycle.viewModelScope
 import com.example.macy.data.repository.OrderRepository
 import kotlinx.coroutines.launch
 
+// Updated OrderViewModel.kt
 class OrderViewModel(private val repository: OrderRepository) : ViewModel() {
     private val _orderResult = MutableLiveData<Boolean>()
     val orderResult: LiveData<Boolean> = _orderResult
 
-    fun createOrder() {
+    // Add parameters to the method
+    fun createOrder(userId: Long, productIds: List<Long>, totalPrice: Double) {
         viewModelScope.launch {
-            try {
-                // Replace with actual order creation logic
-                val success = repository.createOrder() // Ensure repository has this method
-                _orderResult.postValue(success)
-            } catch (e: Exception) {
-                _orderResult.postValue(false)
-            }
+            val success = repository.createOrder(userId, productIds, totalPrice)
+            _orderResult.postValue(success)
         }
     }
 }

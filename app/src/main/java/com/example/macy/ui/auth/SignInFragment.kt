@@ -10,9 +10,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.macy.R
 import com.example.macy.data.local.AppDatabase
+import com.example.macy.data.model.User
 import com.example.macy.data.repository.UserRepository
 import com.example.macy.databinding.FragmentSignInBinding
 
+// SignInFragment.kt
 class SignInFragment : Fragment() {
     private lateinit var binding: FragmentSignInBinding
     private lateinit var viewModel: AuthViewModel
@@ -28,17 +30,15 @@ class SignInFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val userDao = AppDatabase.getInstance(requireContext()).userDao()
-        val userRepository = UserRepository(userDao)
-        viewModel = ViewModelProvider(this, AuthViewModelFactory(userRepository)).get(AuthViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
 
         binding.btnSignIn.setOnClickListener {
-            val email = binding.etEmail.text.toString()
-            val password = binding.etPassword.text.toString()
+            val email = binding.etEmail.toString()
+            val password = binding.etPassword.toString()
             viewModel.signIn(email, password)
         }
 
-        viewModel.signInResult.observe(viewLifecycleOwner) { user ->
+        viewModel.signInResult.observe(viewLifecycleOwner) { user: User? ->
             if (user != null) {
                 findNavController().navigate(R.id.action_signIn_to_home)
             } else {
