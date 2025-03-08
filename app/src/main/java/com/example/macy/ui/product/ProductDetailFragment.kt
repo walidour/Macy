@@ -27,7 +27,7 @@ class ProductDetailFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(ProductViewModel::class.java)
         val productId = arguments?.getLong("productId") ?: 0L
 
-        viewModel.getProductById(productId).observe(viewLifecycleOwner) { product ->
+        viewModel.product.observe(viewLifecycleOwner) { product ->
             product?.let {
                 binding.tvProductName.text = it.name
                 binding.tvPrice.text = "$${it.price}"
@@ -35,8 +35,6 @@ class ProductDetailFragment : Fragment() {
             }
         }
 
-        binding.btnAddToCart.setOnClickListener {
-            // Add to cart logic
-        }
+        viewModel.getProductById(productId)
     }
 }

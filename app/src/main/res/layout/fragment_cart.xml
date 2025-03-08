@@ -2,10 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-        <variable name="viewModel" type="com.macy.app.ui.cart.CartViewModel" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -17,7 +13,7 @@
             android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/totalPriceLayout" />
+            app:layout_constraintBottom_toTopOf="@id/totalPriceLayout" />
 
         <!-- Total Price Section -->
         <LinearLayout
@@ -39,7 +35,7 @@
                 android:id="@+id/tvTotalPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{String.valueOf(viewModel.totalPrice)}"
+                android:text="$0.00"
                 android:textSize="18sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -51,9 +47,7 @@
             android:layout_height="wrap_content"
             android:text="Proceed to Payment"
             android:layout_margin="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

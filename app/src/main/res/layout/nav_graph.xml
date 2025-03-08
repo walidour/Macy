@@ -8,7 +8,7 @@
     <!-- Splash Screen -->
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.macy.app.ui.auth.SplashFragment"
+        android:name="com.example.macy.ui.auth.SplashFragment"
         android:label="Splash"
         tools:layout="@layout/fragment_splash">
         <action
@@ -19,28 +19,139 @@
             app:destination="@id/homeFragment" />
     </fragment>
 
-    <!-- Sign In Screen -->
+    <!-- Authentication Flow -->
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.macy.app.ui.auth.SignInFragment"
+        android:name="com.example.macy.ui.auth.SignInFragment"
         android:label="Sign In"
         tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signIn_to_home"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_signIn_to_signUp"
+            app:destination="@id/signUpFragment" />
     </fragment>
 
-    <!-- Home Screen -->
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.macy.ui.auth.SignUpFragment"
+        android:label="Sign Up"
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/action_signUp_to_home"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <!-- Main Flow -->
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.macy.app.ui.home.HomeFragment"
+        android:name="com.example.macy.ui.home.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_home_to_product"
-            app:destination="@id/productFragment" />
+            android:id="@+id/action_home_to_productList"
+            app:destination="@id/productListFragment" />
+        <action
+            android:id="@+id/action_home_to_profile"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_home_to_cart"
+            app:destination="@id/cartFragment" />
     </fragment>
 
-    <!-- Add other destinations here (Product, Cart, etc.) -->
+    <!-- Product Flow -->
+    <fragment
+        android:id="@+id/productListFragment"
+        android:name="com.example.macy.ui.product.ProductListFragment"
+        android:label="Products"
+        tools:layout="@layout/fragment_product_list">
+        <action
+            android:id="@+id/action_productList_to_productDetail"
+            app:destination="@id/productDetailFragment">
+            <argument
+                android:name="productId"
+                app:argType="long" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.example.macy.ui.product.ProductDetailFragment"
+        android:label="Product Details"
+        tools:layout="@layout/fragment_product_detail">
+        <action
+            android:id="@+id/action_productDetail_to_cart"
+            app:destination="@id/cartFragment" />
+    </fragment>
+
+    <!-- Cart Flow -->
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.example.macy.ui.cart.CartFragment"
+        android:label="Cart"
+        tools:layout="@layout/fragment_cart">
+        <action
+            android:id="@+id/action_cart_to_checkout"
+            app:destination="@id/checkoutFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="com.example.macy.ui.orders.CheckoutFragment"
+        android:label="Checkout"
+        tools:layout="@layout/fragment_checkout">
+        <action
+            android:id="@+id/action_checkout_to_paymentSuccess"
+            app:destination="@id/paymentSuccessFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/paymentSuccessFragment"
+        android:name="com.example.macy.ui.orders.PaymentSuccessFragment"
+        android:label="Payment Success"
+        tools:layout="@layout/fragment_payment_success">
+        <action
+            android:id="@+id/action_paymentSuccess_to_home"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <!-- Profile Flow -->
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.macy.ui.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profile_to_editProfile"
+            app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_profile_to_orderDetails"
+            app:destination="@id/orderDetailsFragment">
+            <argument
+                android:name="orderId"
+                app:argType="long" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.macy.ui.profile.EditProfileFragment"
+        android:label="Edit Profile"
+        tools:layout="@layout/fragment_edit_profile" />
+
+    <!-- Order Details -->
+    <fragment
+        android:id="@+id/orderDetailsFragment"
+        android:name="com.example.macy.ui.orders.OrderDetailsFragment"
+        android:label="Order Details"
+        tools:layout="@layout/fragment_order_details" />
+
+    <!-- Health Tips -->
+    <fragment
+        android:id="@+id/healthTipsFragment"
+        android:name="com.example.macy.ui.healthtips.HealthTipsFragment"
+        android:label="Health Tips"
+        tools:layout="@layout/fragment_health_tips" />
 
 </navigation>

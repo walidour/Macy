@@ -26,10 +26,14 @@ class EditProfileFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         viewModel.loadUserProfile(1) // Assume user ID 1
 
+// File: ui/profile/EditProfileFragment.kt
         binding.btnSave.setOnClickListener {
             val name = binding.etName.text.toString()
             val email = binding.etEmail.text.toString()
-            // Update user logic
+            val address = binding.etAddress.text.toString()
+
+            // Update user in ViewModel
+            viewModel.updateUser(name, email, address)
         }
     }
 }

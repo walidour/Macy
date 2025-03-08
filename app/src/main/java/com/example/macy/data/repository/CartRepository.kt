@@ -21,7 +21,11 @@ class CartRepository(
             CartItemWithProduct(cartItem, product) // Now resolves
         }
     }
-
+    // File: data/repository/CartRepository.kt
+    suspend fun calculateCartTotal(userId: Long): Double {
+        val items = getCartItemsWithProducts(userId)
+        return items.sumOf { it.product?.price?.times(it.cartItem.quantity) ?: 0.0 }
+    }
     suspend fun clearCart(userId: Long) {
         cartDao.clearCart(userId)
     }

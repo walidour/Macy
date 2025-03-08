@@ -1,4 +1,4 @@
-package com.example.macy
+package com.example.macy.ui.orders
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.macy.R
+import com.example.macy.databinding.FragmentCheckoutBinding
 
 class CheckoutFragment : Fragment() {
     private lateinit var binding: FragmentCheckoutBinding
@@ -26,10 +28,13 @@ class CheckoutFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(OrderViewModel::class.java)
 
         binding.btnConfirmPayment.setOnClickListener {
-            viewModel.createOrder().observe(viewLifecycleOwner) { success ->
-                if (success) {
-                    findNavController().navigate(R.id.action_checkout_to_paymentSuccess)
-                }
+            viewModel.createOrder()
+        }
+
+        // Observe order creation result
+        viewModel.orderResult.observe(viewLifecycleOwner) { success ->
+            if (success) {
+                findNavController().navigate(R.id.action_checkout_to_paymentSuccess)
             }
         }
     }
